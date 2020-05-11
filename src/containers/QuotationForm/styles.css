@@ -1,0 +1,11 @@
+.suggestion-item > .title {
+    font-weight: bold;
+    color: #303030;
+}
+.suggestion-item > .subtitle {
+    color: #808080;
+}
+
+.info-title {
+    font-weight: bold;
+}

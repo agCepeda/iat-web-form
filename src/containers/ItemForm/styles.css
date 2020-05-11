@@ -1,0 +1,22 @@
+.lobby-button {
+    font-size: xx-large;
+    border: 1px solid #1eaccc;
+    background-color: #1eaccc;
+}
+
+.lobby-button span {
+    color: white;
+}
+.item-resource-container {
+    width: 100;
+    height: 100;
+    background: black;
+}
+
+.error-description {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 3px;
+}
