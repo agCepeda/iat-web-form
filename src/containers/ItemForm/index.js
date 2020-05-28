@@ -7,9 +7,31 @@ import logo from "../../logo.svg";
 
 const ItemFormContainer = () => {
 
-  const [suggestions, setSuggestions] = useState();
-  const [customer, setCustomer] = useState();
   const [isVisible, setIsVisible] = useState(false);
+  const [counter, setCounter] = useState(0);
+  const [answers, setAnswers] = useState([]);
+  const [startTime, setStartTime] = useState();
+  
+  const zKeyPress = useKeyPress(['z', 'Z']);
+
+  useEffect(() => {
+    if (zKeyPress == null || startTime == null) { return; }
+    
+    let timeOffset = zKeyPress.getTime() - startTime.getTime();
+
+    setAnswers([...answers, { key: "Z", timeOffset }]);
+    showNextItem();
+  }, [zKeyPress]);
+
+  const runTest = () => {
+    setIsVisible(true);
+    showNextItem();
+  }
+
+  const showNextItem = () => {
+    var initialTime = new Date();
+    setStartTime(initialTime);
+  }
 
   const renderLobby = () => {
     return (
@@ -18,7 +40,13 @@ const ItemFormContainer = () => {
           <div className="p-offset-3 p-col-6">
             <h1></h1>
               <div className="lobby-button">
-                <a type="button" onClick={() => setIsVisible(true)}><span>PRESIONA LA TECLA <strong>A</strong>  O <strong>ESTE BOTON</strong> PARA CONTINUAR</span></a>
+                <a type="button" onClick={() => runTest()}>
+                  <span>
+                    PRESIONA LA TECLA 
+                    <strong>A</strong>  O <strong>ESTE BOTON</strong> 
+                    PARA CONTINUAR
+                  </span>
+                </a>
               </div>
           </div>
         </div>
@@ -31,6 +59,7 @@ const ItemFormContainer = () => {
       <Card>
       <div className="p-grid p-align-center">
         <div className="p-offset-3 p-col-6">
+          <p>{JSON.stringify(answers)}</p>
           <h1>BLOQUE 1</h1>
         </div>
       </div>
@@ -55,20 +84,30 @@ const ItemFormContainer = () => {
   };
 
   return isVisible ? renderItemForm() : renderLobby();
+}
 
-//   return (
-//     <Card>
-//       <h1>BLOQUE 2</h1>
-//       <div className="p-grid">
-//         <div className="p-col">
-//             <h3>Naturaleza</h3>
-//         </div>
-//         <div className="p-col">
-//             <h3>Naturaleza</h3>
-//         </div>
-//       </div>
-//     </Card>
-//   )
+// Hook
+function useKeyPress(targetKeys) {
+  // State for keeping track of whether key is pressed
+  const [keyPressed, setKeyPressed] = useState(null);
+
+  // If pressed key is our target key then set to true
+  function downHandler({ key }) {
+    if (targetKeys.indexOf(key) >= 0) {
+      setKeyPressed(new Date());
+    }
+  }
+
+  // Add event listeners
+  useEffect(() => {
+    window.addEventListener('keypress', downHandler);
+    // Remove event listeners on cleanup
+    return () => {
+      window.removeEventListener('keypress', downHandler);
+    };
+  }, []); // Empty array ensures that effect is only run on mount and unmount
+
+  return keyPressed;
 }
 
 export default ItemFormContainer;
