@@ -13,15 +13,24 @@ const ItemFormContainer = () => {
   const [startTime, setStartTime] = useState();
   
   const zKeyPress = useKeyPress(['z', 'Z']);
+  const mKeyPress = useKeyPress(['m', 'M']);
 
   useEffect(() => {
     if (zKeyPress == null || startTime == null) { return; }
-    
     let timeOffset = zKeyPress.getTime() - startTime.getTime();
-
-    setAnswers([...answers, { key: "Z", timeOffset }]);
-    showNextItem();
+    registerAnswer("Z", timeOffset);
   }, [zKeyPress]);
+
+  useEffect(() => {
+    if (mKeyPress == null || startTime == null) { return; }
+    let timeOffset = mKeyPress.getTime() - startTime.getTime();
+    registerAnswer("M", timeOffset);
+  }, [mKeyPress]);
+
+  const registerAnswer = (key, timeOffset) => {
+    setAnswers([...answers, { key, timeOffset }]);
+    showNextItem();
+  }
 
   const runTest = () => {
     setIsVisible(true);
