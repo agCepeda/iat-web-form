@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Menu} from 'primereact/menu';
 import {Breadcrumb} from 'primereact/breadcrumb';
 
@@ -7,6 +7,7 @@ import './App.css';
 import QuotationTable from "./containers/QuotationTable";
 import QuotationForm from "./containers/QuotationForm";
 import ItemForm from "./containers/ItemForm";
+import TestForm from "./containers/TestForm";
 
 
 import 'primereact/resources/themes/nova-light/theme.css';
@@ -39,8 +40,32 @@ const breadItems = [
 
 const home = {icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact'}
 
+const App = () => {
 
-function App() {
+  const [isResultVisible, setIsResultVisible] = useState(false);
+  const [resultData, setResultData] = useState();
+
+  const onTestFinished = (outputData) => {
+    setResultData(outputData);
+    setIsResultVisible(true);
+  }
+
+  const renderResult = () => {
+    return resultData.map(
+      b => (
+        <table>
+          <tr><td>{b.name}</td></tr>
+      {b.answers.map(a => (<tr><td>{a.key}</td><td>{a.answerTime}</td></tr>))}
+        </table>
+      ))
+  }
+
+  const renderContent = () => {
+    if (isResultVisible) {
+      return renderResult();
+    }
+    return <TestForm className="p-col" onTestFinished={onTestFinished}/>;
+  }
 
   return (
     <div className="App p-grid">
@@ -48,7 +73,7 @@ function App() {
         <Menu model={items} />
       </div>
       <div className="p-col">
-        <ItemForm className="p-col"/>
+        {renderContent()}
       </div>
     </div>
   );

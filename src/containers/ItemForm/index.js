@@ -5,7 +5,7 @@ import "./styles.css";
 import { Button } from "primereact/button";
 import logo from "../../logo.svg";
 
-const ItemFormContainer = () => {
+const ItemFormContainer = (props) => {
 
   const [isVisible, setIsVisible] = useState(false);
   const [counter, setCounter] = useState(0);
@@ -14,6 +14,13 @@ const ItemFormContainer = () => {
   
   const zKeyPress = useKeyPress(['z', 'Z']);
   const mKeyPress = useKeyPress(['m', 'M']);
+
+  const [item, setItem] = useState(props.item || {});
+
+  useEffect(() => {
+    setupStartTime();
+    setItem(props.item || {});
+  }, [props.item]);
 
   useEffect(() => {
     if (zKeyPress == null || startTime == null) { return; }
@@ -27,9 +34,15 @@ const ItemFormContainer = () => {
     registerAnswer("M", timeOffset);
   }, [mKeyPress]);
 
+  const setupStartTime = () => {
+    var initialTime = new Date();
+    setStartTime(initialTime);
+  }
+
   const registerAnswer = (key, timeOffset) => {
-    setAnswers([...answers, { key, timeOffset }]);
-    showNextItem();
+    if (props.onItemAnswered != null) {
+      props.onItemAnswered(key, timeOffset);
+     }
   }
 
   const runTest = () => {
@@ -66,33 +79,29 @@ const ItemFormContainer = () => {
   const renderItemForm = () => {
     return (
       <Card>
-      <div className="p-grid p-align-center">
-        <div className="p-offset-3 p-col-6">
-          <p>{JSON.stringify(answers)}</p>
-          <h1>BLOQUE 1</h1>
-        </div>
-      </div>
         <div className="p-grid p-align-center">
           <div className="p-offset-3 p-col-6">
             <p className="error-description">Error description</p>
-            <img className="item-resource-container" src={logo}></img>
+            <h1>{item.value}</h1>
+            {/* <img className="item-resource-container" src={logo}></img> */}
           </div>
         </div>
           <div className="p-grid ">
             <div className="p-col-6">
               <p>Z</p>
-              <h3>BUENO</h3>
+              <h3>{props.rightTitle}</h3>
             </div>
             <div className="p-col-6">
               <p>M</p>
-              <h3>MALO</h3>
+              <h3>{props.leftTitle}</h3>
             </div>
           </div>
       </Card>
     )
   };
 
-  return isVisible ? renderItemForm() : renderLobby();
+  return renderItemForm();
+  // return isVisible ? renderItemForm() : renderLobby();
 }
 
 // Hook
