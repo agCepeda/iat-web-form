@@ -1,115 +1,65 @@
 import React, { useState, useEffect } from 'react';
+import {useHistory} from "react-router-dom";
+import RegistroDatosContainer from "../registro-datos";
+import {EstimulosContainer} from "../estimulos";
+import {InstruccionesContainer} from "../instrucciones";
+import Form from "./form";
+import * as ACTIONS from "../../actions";
+import {connect} from "react-redux";
+import FinalContainer from "./final";
 
-import bloques from '../../api/mocks/bloques';
-import ItemFormContainer from '../ItemForm';
 
-const BlockForm = (props) => {
-    const [block, setBlock] = useState({ items: [] });
-    const [itemCount, setItemCount] = useState(0);
-    const [isVisibleWaiting, setIsVisibleWaiting] = useState(false);
-    const [answers, setAnswers] = useState([]);
+const TestFormContainer = (props) => {
 
-    useEffect(() => {
-        setBlock(props.block);
-    }, [props.block])
+    const [paginaActual, setPaginaActual] = useState(1);
+    const [resultId, setResultId] = useState();
+    const history = useHistory();
 
-    const onItemAnswered = (key, answerTime) => {
-        var newAnswers = [...answers, {  key, answerTime }];
-        setAnswers(newAnswers);
+    const iniciarPrueba = (props) => {
+        history.push("/prueba");
+    }
 
-        if (itemCount + 1 < block.items.length) {
-            setIsVisibleWaiting(true);
-            setTimeout(() => {
-                setItemCount(itemCount + 1);
-                setIsVisibleWaiting(false);
-            }, 500);
-        } else if (props.onBlockFinished) {
-            props.onBlockFinished(newAnswers);
+    const onTestFinished = (result) => {
+        props.saveTestResult(result)
+          .then(res => {
+              setPaginaActual(5)
+              setResultId(res.id)
+          });
+    }
+
+    switch (paginaActual) {
+        case 1: {
+            return <RegistroDatosContainer onSiguiente={() => setPaginaActual(2)}/>
+        }
+        case 2: {
+            return <EstimulosContainer onSiguiente={() => setPaginaActual(3)}></EstimulosContainer>
+        }
+        case 3: {
+            return <InstruccionesContainer onSiguiente={() => setPaginaActual(4)}></InstruccionesContainer>
+        }
+        case 4: {
+            //return <TestForm {...routeProps} onTestFinished={onTestFinished}></TestForm>
+            return <Form {...props}  onTestFinished={onTestFinished}/>
+        }
+        case 5: {
+            return <FinalContainer folio={resultId}></FinalContainer>
+        }
+        default: {
+            return <div></div>
         }
     }
-    const renderWaiting = () => {
-        return <div>WAITING...</div>;
-    }
 
-    const renderItemForm = () => {
-        if (block == null) { return <div></div>; }
-        if (block.items.length < 0) {}
-
-        return (
-            <div>
-                <div className="p-offset-3 p-col-6">
-                    <h4>{block.name}</h4>
-                </div>
-                <ItemFormContainer 
-                    leftTitle={block.leftTitle} 
-                    rightTitle={block.rightTitle} 
-                    item={block.items[itemCount]}
-                    onItemAnswered={onItemAnswered}
-                    />
-            </div>
-        )
-    }
-    return isVisibleWaiting ? renderWaiting() : renderItemForm();
 }
 
-const TestForm = (props) => {
-    const [blockCount, setBlockCount] = useState(0);
-    const [isTransitionVisible, setIsTransitionVisible] = useState(false);
-    const [bloquesOutput, setBloquesOutput] = useState([]);
+const mapStateToProps = () => {
 
-    const renderPreview = () => {
-        return (
-        <div>
-            
-        </div>
-        )
+};
+
+const mapDispatchToProps = (dispatch) => {
+    console.log("mapDispatchToProps", mapDispatchToProps)
+    return {
+        saveTestResult: (result) => dispatch(ACTIONS.saveTestResult(result))
     }
+};
 
-
-  const renderBlockTransition = () => {
-    return (
-        <div className="p-grid p-align-center">
-          <div className="p-offset-3 p-col-6">
-            <h1></h1>
-              <div className="lobby-button">
-                <a type="button" onClick={() => startNewBlock()}>
-                  <span>
-                    PRESIONA LA TECLA 
-                    <strong>A</strong>  O <strong>ESTE BOTON</strong> 
-                    PARA CONTINUAR
-                  </span>
-                </a>
-              </div>
-          </div>
-        </div>
-    )
-  };
-
-    const onBlockFinished = (answers) => {
-        var bloque = bloques[blockCount];
-        var newBloque = { name: bloque.name, answers };
-        var newBloquesOutput = [...bloquesOutput, newBloque];
-        setBloquesOutput(newBloquesOutput);
-        setIsTransitionVisible(true);
-        if (blockCount + 1 >= bloques.length) {
-            if (props.onTestFinished != null) {
-                props.onTestFinished(newBloquesOutput);
-            }
-        } //else {
-        //     setIsTransitionVisible(true);
-        // }
-    }
-
-    const startNewBlock = () => {
-        setBlockCount(blockCount + 1);
-        setIsTransitionVisible(false);
-    }
-
-    const renderBlockForm = (blockCount) => {
-        return <BlockForm block={bloques[blockCount]} onBlockFinished={onBlockFinished}></BlockForm>;
-    }
-    
-    return isTransitionVisible ? renderBlockTransition() : renderBlockForm(blockCount);
-}
-
-export default TestForm;
+export default connect(mapStateToProps,mapDispatchToProps)(TestFormContainer);
