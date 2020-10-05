@@ -1,9 +1,9 @@
 import React, {useState, useEffect } from "react";
-import {buildTest} from "../../services/test_builder";
+import {buildContraBalancedTest,buildBalancedTest} from "../../services/test_builder";
 import dataset_prueba1 from "../../api/mocks/dataset_prueba1";
 import BlockForm from "./block";
 
-const bloques = buildTest(dataset_prueba1);
+const bloques = buildBalancedTest(dataset_prueba1);
 
 
 const Form = (props) => {

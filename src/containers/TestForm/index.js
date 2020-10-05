@@ -20,7 +20,7 @@ const TestFormContainer = (props) => {
     }
 
     const onTestFinished = (result) => {
-        props.saveTestResult(result)
+        props.saveTestResult({ bloques: result, tipo: "BAL" })
           .then(res => {
               setPaginaActual(5)
               setResultId(res.id)

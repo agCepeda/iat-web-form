@@ -82,8 +82,8 @@ export const setSujeto = (sujeto) => {
 export const saveTestResult = (resultData) => (dispatch, getState) => {
 	const { sujeto } = getState().userState;
 	return store
-	  .collection('resultados')
-	  .add({ bloques: resultData, sujeto })
+	  .collection('resultados-2')
+	  .add({ ...resultData, sujeto })
 	  .then(response => {
 	  	console.log(response);
 	  	return response;

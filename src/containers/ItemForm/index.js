@@ -119,7 +119,7 @@ const ItemFormContainer = (props) => {
             registerAnswer("Z", timeOffset);
           }}>
             <span>Z</span>
-            <p><strong dangerouslySetInnerHTML={{__html: props.rightTitle}}></strong> </p>
+            <p><strong dangerouslySetInnerHTML={{__html: props.leftTitle}}></strong> </p>
           </button>
         </div>
         <div className="col-6" style={{ marginTop: 20}}       >
@@ -132,7 +132,7 @@ const ItemFormContainer = (props) => {
             registerAnswer("M", timeOffset);
           }}>
             <span>M</span>
-            <p><strong dangerouslySetInnerHTML={{__html: props.leftTitle}}></strong> </p>
+            <p><strong dangerouslySetInnerHTML={{__html: props.rightTitle}}></strong> </p>
           </button>
         </div>
       </div>
