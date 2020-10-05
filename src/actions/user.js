@@ -82,7 +82,7 @@ export const setSujeto = (sujeto) => {
 export const saveTestResult = (resultData) => (dispatch, getState) => {
 	const { sujeto } = getState().userState;
 	return store
-	  .collection('resultados-2')
+	  .collection('resultados')
 	  .add({ ...resultData, sujeto })
 	  .then(response => {
 	  	console.log(response);
