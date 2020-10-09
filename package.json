@@ -10,6 +10,7 @@
     "classnames": "^2.2.6",
     "firebase": "7.2.3",
     "jquery": "^3.5.1",
+    "lodash": "^4.17.20",
     "papercss": "^1.7.0",
     "primeflex": "primefaces/primeflex",
     "primeicons": "^2.0.0",

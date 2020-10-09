@@ -1,4 +1,6 @@
 export {
 	setSujeto,
-  saveTestResult
+  saveTestResult,
+  getAllResults,
+  setResultIds
 } from './user';

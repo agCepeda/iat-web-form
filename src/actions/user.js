@@ -82,10 +82,27 @@ export const setSujeto = (sujeto) => {
 export const saveTestResult = (resultData) => (dispatch, getState) => {
 	const { sujeto } = getState().userState;
 	return store
-	  .collection('resultados')
+	  .collection('resultados-2')
 	  .add({ ...resultData, sujeto })
 	  .then(response => {
 	  	console.log(response);
 	  	return response;
 	  });
 };
+
+export const setResultIds = (resultIds) => {
+	return {
+		type: TYPES.SET_RESULT_IDS,
+		payload: resultIds
+	}
+}
+
+export const getAllResults = () => dispatch => {
+	store
+	  .collection('resultados')
+	  .get()
+	  .then(r => {
+	  	console.log(r.docs.map(r1 => r1.id));
+	  	dispatch(setResultIds(r.docs.map(r1 => r1.id)));
+	  });
+}
