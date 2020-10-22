@@ -11,6 +11,7 @@ import {ReduxService} from "./services/redux";
 import {useWindowSize} from "./hooks";
 import TestFormContainer from "./containers/TestForm";
 import {InicioConsentimientoContainer} from "./containers/inicio-consentimiento";
+import ResultContainer from "./containers/Result";
 
 
 const App = (props) => {
@@ -55,15 +56,10 @@ const App = (props) => {
     }
 
     return (
-        <div>
-            <div className={"container"}>
-                <div className="row justify-content-center">
-                    <div className="col-7">
-                        <div className="shadow-sm p-3 mb-5 bg-white rounded">
-                            <Switch>
-                                <Route path="/prueba" exact render={(routeProps) => (<TestFormContainer />)} />
-                                <Route path="/" exact component={(routeProps) => <InicioConsentimientoContainer onSiguiente={() => history.push("/prueba")} />}></Route>
-                                {/*
+      <Switch>
+          <Route path="/prueba" exact render={(routeProps) => (<TestFormContainer />)} />
+          <Route path="/" exact component={(routeProps) => <InicioConsentimientoContainer onSiguiente={() => history.push("/prueba")} />}></Route>
+          {/*
                                     <Inic  />} />
                                 <Route path="/registro" exact component={RegistroDatosContainer} ></Route>
 
@@ -73,13 +69,11 @@ const App = (props) => {
                                 <Route path="/resultado-prueba" exact render={(routeProps) => (
                                   <ResultContainer {...routeProps} testResult={resultData}></ResultContainer>
                                 )} />*/}
-                            </Switch>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+          <Route path="/7a3EHY8YauCZjisBFf91kUSphItCXIfQ" exact component={ResultContainer} ></Route>
+      </Switch>
     )
+    /*
+     */
 
     /*
     return (

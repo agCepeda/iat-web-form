@@ -1,6 +1,10 @@
 export {
 	setSujeto,
-  saveTestResult,
-  getAllResults,
-  setResultIds
+	saveTestResult,
 } from './user';
+
+export {
+	getAllResults,
+	setResultIds,
+	getResultById
+} from './admin';

@@ -7,6 +7,7 @@ import Form from "./form";
 import * as ACTIONS from "../../actions";
 import {connect} from "react-redux";
 import FinalContainer from "./final";
+import {TestLayout} from "../../components";
 
 
 const TestFormContainer = (props) => {
@@ -27,27 +28,33 @@ const TestFormContainer = (props) => {
           });
     }
 
-    switch (paginaActual) {
-        case 1: {
-            return <RegistroDatosContainer onSiguiente={() => setPaginaActual(2)}/>
-        }
-        case 2: {
-            return <EstimulosContainer onSiguiente={() => setPaginaActual(3)}></EstimulosContainer>
-        }
-        case 3: {
-            return <InstruccionesContainer onSiguiente={() => setPaginaActual(4)}></InstruccionesContainer>
-        }
-        case 4: {
-            //return <TestForm {...routeProps} onTestFinished={onTestFinished}></TestForm>
-            return <Form {...props}  onTestFinished={onTestFinished}/>
-        }
-        case 5: {
-            return <FinalContainer folio={resultId}></FinalContainer>
-        }
-        default: {
-            return <div></div>
+    const renderContent = () => {
+        switch (paginaActual) {
+            case 1: {
+                return <RegistroDatosContainer onSiguiente={() => setPaginaActual(2)}/>
+            }
+            case 2: {
+                return <EstimulosContainer onSiguiente={() => setPaginaActual(3)}></EstimulosContainer>
+            }
+            case 3: {
+                return <InstruccionesContainer onSiguiente={() => setPaginaActual(4)}></InstruccionesContainer>
+            }
+            case 4: {
+                //return <TestForm {...routeProps} onTestFinished={onTestFinished}></TestForm>
+                return <Form {...props}  onTestFinished={onTestFinished}/>
+            }
+            case 5: {
+                return <FinalContainer folio={resultId}></FinalContainer>
+            }
+            default: {
+                return <div></div>
+            }
         }
     }
+
+    return (
+      <TestLayout>{renderContent()}</TestLayout>
+    )
 
 }
 
