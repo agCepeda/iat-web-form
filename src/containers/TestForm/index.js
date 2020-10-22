@@ -11,7 +11,7 @@ import FinalContainer from "./final";
 
 const TestFormContainer = (props) => {
 
-    const [paginaActual, setPaginaActual] = useState(1);
+    const [paginaActual, setPaginaActual] = useState(2);
     const [resultId, setResultId] = useState();
     const history = useHistory();
 

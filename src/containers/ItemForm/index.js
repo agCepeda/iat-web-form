@@ -43,10 +43,11 @@ const ItemFormContainer = (props) => {
   }
 
   const registerAnswer = (key, timeOffset) => {
-    var correctAnswer = (key == 'M' || key == 'm')? props.categoryRight : props.categoryLeft;
-    correctAnswer = correctAnswer || [];
-    console.log("Correct Answer Array", correctAnswer, props.item.answer);
-    var hasError = correctAnswer.indexOf(props.item.answer) >= 0;
+    var userAnswer = (key == 'M' || key == 'm')? props.categoryRight : props.categoryLeft;
+    userAnswer = userAnswer || [];
+
+    var hasError = userAnswer.indexOf(props.item.answer) < 0;
+
     setHasError(hasError);
     setErrorRegistered(hasError);
     if (hasError) {

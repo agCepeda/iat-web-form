@@ -1,7 +1,7 @@
 import {generateRandomCode} from "../../services/test_builder";
 import React from "react";
 
-const encuestaUrl = "https://tinyurl.com/iptz-epca";
+const encuestaUrl = "https://forms.gle/hrB6NUrjAE6EdL2J8";
 
 const FinalContainer = (props) => {
 	return (

@@ -4,22 +4,19 @@ export const InicioConsentimientoContainer = (props) => {
 	return (
 	  <div>
 		  <p>
-			  Gracias por tu interés en el estudio. A continuación completarás una <strong>Prueba de Asociación Implícita</strong>. La
-			  prueba tardará menos de 10 minutos en completarse. Para mejores resultados, minimiza las distracciones y
-			  cierra los programas abiertos en tu dispositivo.
+			  Por medio de la presente hago constatar que estoy enterado de los objetivos que persigue la investigación
+			  -Actitud ambiental explícita e implícita, religiosidad y espiritualidad- así como la forma en la que se
+			  lleva a cabo. Además, manifiesto que participo en este estudio en forma voluntaria y sin compromiso.
 		  </p>
 		  <p>
-			  Este estudio es completamente anónimo, tu nombre u otra información de identificación no se recopila en
-			  ningún momento. Los datos recopilados se agruparán y analizarán solo en forma agregada, con fines meramente académicos.
-
+			  Tengo conocimiento de que el estudio es anónimo y toda la información que desprenda será de carácter
+			  estrictamente confidencial, será utilizada únicamente por el equipo de investigación del proyecto y no
+			  estará disponible para ningún otro propósito. Los resultados de este estudio serán publicados con fines
+			  científicos, se presentarán como datos grupales de tal forma que no implicará la identificación personal.
 		  </p>
 		  <p>
-			  Si tienes alguna pregunta o inquietud acerca de este estudio, comunícate con la investigadora principal, <strong>Martha E. González M.</strong>, a
-			  la dirección <a href="mailto:elva.gonzalezmrn@uanl.edu.mx">elva.gonzalezmrn@uanl.edu.mx</a>; <strong>Facultad de
-			  Psicología de la Universidad Autónoma de Nuevo León. Monterrey, N. L., México</strong>.
-		  </p>
-		  <p>
-			  Si aceptas libremente participar en este estudio, haz clic en el botón “Continuar" para iniciar con la prueba.
+			  Marcar en aceptar no establece ningún tipo de obligación, solo significa que estoy enterado y que acepto
+			  participar voluntariamente en la investigación mencionada.
 		  </p>
 		  <button type="button" className="btn btn-primary btn-lg" onClick={props.onSiguiente}>Continuar</button>
 	  </div>

@@ -9,13 +9,13 @@ import {generateRandomCode} from "../services/test_builder";
 require("firebase/firestore");
 
 var firebaseConfig = {
-	apiKey: "AIzaSyCzwf6qhRgNXStddmD7gomS_NxAw-qjxKo",
-	authDomain: "iat-web.firebaseapp.com",
-	databaseURL: "https://iat-web.firebaseio.com",
-	projectId: "iat-web",
-	storageBucket: "iat-web.appspot.com",
-	messagingSenderId: "921788577500",
-	appId: "1:921788577500:web:28977895611a8d5c846619"
+	apiKey: "AIzaSyCLDwGt239sA4QassTV7P__DrVe0229Jw0",
+	authDomain: "iat-web-monica.firebaseapp.com",
+	databaseURL: "https://iat-web-monica.firebaseio.com",
+	projectId: "iat-web-monica",
+	storageBucket: "iat-web-monica.appspot.com",
+	messagingSenderId: "189696678956",
+	appId: "1:189696678956:web:1ca7978aed2f2ca3838589"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -82,7 +82,7 @@ export const setSujeto = (sujeto) => {
 export const saveTestResult = (resultData) => (dispatch, getState) => {
 	const { sujeto } = getState().userState;
 	return store
-	  .collection('resultados-2')
+	  .collection('resultados')
 	  .add({ ...resultData, sujeto })
 	  .then(response => {
 	  	console.log(response);

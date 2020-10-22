@@ -1,9 +1,9 @@
 import React, {useState, useEffect } from "react";
 import {buildContraBalancedTest,buildBalancedTest} from "../../services/test_builder";
-import dataset_prueba1 from "../../api/mocks/dataset_prueba1";
+import {dataSet1} from "../../api/dataset_monica_prueba1";
 import BlockForm from "./block";
 
-const bloques = buildBalancedTest(dataset_prueba1);
+const bloques = buildBalancedTest(dataSet1);
 
 
 const Form = (props) => {
@@ -14,19 +14,19 @@ const Form = (props) => {
 
 	useEffect(() => {
 		cacheImages([
-			"images/A1.jpg",
-			"images/A2.jpg",
-			"images/A3.jpg",
-			"images/A4.jpg",
-			"images/A5.jpg",
-			"images/A6.jpg",
+			"images/A01.jpg",
+			"images/A02.jpg",
+			"images/A03.jpg",
+			"images/A04.jpg",
+			"images/A05.jpg",
+			"images/A06.jpg",
 
-			"images/B1.jpg",
-			"images/B2.jpg",
-			"images/B3.jpg",
-			"images/B4.jpg",
-			"images/B5.jpg",
-			"images/B6.jpg",
+			"images/B01.jpg",
+			"images/B02.jpg",
+			"images/B03.jpg",
+			"images/B04.jpg",
+			"images/B05.jpg",
+			"images/B06.jpg",
 		]).finally(() => setIsLoading(false));
 	}, []);
 
