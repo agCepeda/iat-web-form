@@ -1,9 +1,10 @@
 import React, {useState, useEffect } from "react";
-import {buildContraBalancedTest,buildBalancedTest} from "../../services/test_builder";
-import {dataSet1} from "../../api/dataset_monica_prueba1";
+import {buildTest} from "../../services/test_builder";
+import dataset1 from "../../api/dataset_monica_prueba1";
+import dataset2 from "../../api/dataset_monica_prueba2";
 import BlockForm from "./block";
 
-const bloques = buildBalancedTest(dataSet1);
+const bloques = buildTest(dataset2);
 
 
 const Form = (props) => {

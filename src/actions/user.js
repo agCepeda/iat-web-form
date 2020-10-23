@@ -20,50 +20,6 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var store = firebase.firestore();
-/*
-firebase.firestore()
-  .collection('requirements')
-  .get()
-  .then(query => {
-	  let req: any = [];
-	  query.forEach(doc => {
-		  req.push({id: doc.id, ...doc.data()});
-	  });
-	  setRequirements(req);
-  });*/
-/*
-await firestore()
-  .collection('posts')
-  .add(postData);
-
-docRef
-  .limit(100)
-  .where('active', '==', true)
-  .where('location', '>', lesserGeopoint)
-  .where('location', '<', greaterGeopoint)
-  .onSnapshot((snapshot) => {
-	  let markers = [];
-	  if (snapshot) {
-		  snapshot.forEach(doc => {
-			  markers.push({id: doc.id, ...doc.data()});
-		  });
-	  }
-	  dispatch(ACTIONS.setPostMarkers(markers));
-  });
-*/
-
-/*
-props.setSujeto(datos);
-console.log(db)
-var ref = db.ref("/");
-
-var usersRef = ref.child("prueba-resultado");
-usersRef.set({
-	aplicante: datos
-});
-
-console.log(JSON.stringify(datos))*/
-
 
 export const setUser = (user) => {
 	return {
@@ -82,7 +38,7 @@ export const setSujeto = (sujeto) => {
 export const saveTestResult = (resultData) => (dispatch, getState) => {
 	const { sujeto } = getState().userState;
 	return store
-	  .collection('resultados')
+	  .collection('resultados-cbal')
 	  .add({ ...resultData, sujeto })
 	  .then(response => {
 	  	console.log(response);

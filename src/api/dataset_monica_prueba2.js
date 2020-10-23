@@ -2,18 +2,6 @@
 module.exports = {
 	category_01: {
 		id: "category_01",
-		name: "NATURALEZA",
-		items: [
-			{ type: "image", value: "A01.jpg" },
-			{ type: "image", value: "A02.jpg" },
-			{ type: "image", value: "A03.jpg" },
-			{ type: "image", value: "A04.jpg" },
-			{ type: "image", value: "A05.jpg" },
-			{ type: "image", value: "A06.jpg" },
-		]
-	},
-	category_02: {
-		id: "category_02",
 		name: "CIUDAD",
 		items: [
 			{ type: "image", value: "B01.jpg" },
@@ -22,6 +10,18 @@ module.exports = {
 			{ type: "image", value: "B04.jpg" },
 			{ type: "image", value: "B05.jpg" },
 			{ type: "image", value: "B06.jpg" },
+		]
+	},
+	category_02: {
+		id: "category_02",
+		name: "NATURALEZA",
+		items: [
+			{ type: "image", value: "A01.jpg" },
+			{ type: "image", value: "A02.jpg" },
+			{ type: "image", value: "A03.jpg" },
+			{ type: "image", value: "A04.jpg" },
+			{ type: "image", value: "A05.jpg" },
+			{ type: "image", value: "A06.jpg" },
 		]
 	},
 	category_03: {

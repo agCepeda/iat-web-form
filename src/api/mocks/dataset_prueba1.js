@@ -1,4 +1,4 @@
-export default {
+module.exports = {
 	category_1: [
 		{ type: "image", value: "A1.jpg", answer: "category_1" },
 		{ type: "image", value: "A2.jpg", answer: "category_1" },
