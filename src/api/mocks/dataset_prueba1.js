@@ -1,15 +1,15 @@
 export const datCBalContent = () => {
-	const itemDatContent = (item) => `"${item.value}"\n`
+	const itemDatContent = (item) => `"${item.value}"\r\n`
 	const categoryDatContent = (cat) => {
-		return `"${cat.name}"\n${cat.items.map(itemDatContent).join()}`;
+		return `"${cat.name}"\r\n${cat.items.map(itemDatContent).join("")}\r\n`;
 	}
 
-	return cbalanced.map(categoryDatContent).join();
+	return cbalanced.map(categoryDatContent).join("");
 }
 export const datBalContent = () => {
-	const itemDatContent = (item) => `"${item.value}"\n`
+	const itemDatContent = (item) => `"${item.value}"\r\n`
 	const categoryDatContent = (cat) => {
-		return `"${cat.name}"\n${cat.items.map(itemDatContent).join("")}\n`;
+		return `"${cat.name}"\r\n${cat.items.map(itemDatContent).join("")}\r\n`;
 	}
 
 	return balanced.map(categoryDatContent).join("");
@@ -39,17 +39,6 @@ export const balanced = [
 		]
 	},
 	{
-		name: "MALO",
-		items: [
-			{type: "word", value: "MIEDO", answer: "category_4"},
-			{type: "word", value: "TRISTEZA", answer: "category_4"},
-			{type: "word", value: "ODIO", answer: "category_4"},
-			{type: "word", value: "TEMOR", answer: "category_4"},
-			{type: "word", value: "FASTIDIO", answer: "category_4"},
-			{type: "word", value: "DESPRECIO", answer: "category_4"}
-		]
-	},
-	{
 		name: "BUENO",
 		items: [
 			{type: "word", value: "AMOR", answer: "category_3"},
@@ -58,6 +47,17 @@ export const balanced = [
 			{type: "word", value: "ÉXITO", answer: "category_3"},
 			{type: "word", value: "FELICIDAD", answer: "category_3"},
 			{type: "word", value: "PAZ", answer: "category_3"}
+		]
+	},
+	{
+		name: "MALO",
+		items: [
+			{type: "word", value: "MIEDO", answer: "category_4"},
+			{type: "word", value: "TRISTEZA", answer: "category_4"},
+			{type: "word", value: "ODIO", answer: "category_4"},
+			{type: "word", value: "TEMOR", answer: "category_4"},
+			{type: "word", value: "FASTIDIO", answer: "category_4"},
+			{type: "word", value: "DESPRECIO", answer: "category_4"}
 		]
 	}
 ]

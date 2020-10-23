@@ -158,51 +158,34 @@ const ResultContainer = (props) => {
 		}
 	}
 
-	const downloadData = () => {
-		let sujetoLines = `"${currResult.id}","XXXX","XX/XX/XX","${currResult.sujeto.ocupacion}","${currResult.sujeto.email}","${currResult.sujeto.edad}","${currResult.sujeto.genero}"\n\r`
 
-		let categoriesBal = datBalContent();
-		let categoriesCBal = datCBalContent();
-
-		console.log("datCBalContent", datCBalContent)
-		console.log("datBalContent", datBalContent)
-
-		let bloqueLines = currResult.bloques.map((b, ib) => {
-			return [
-				`"BLK${ib +1}" \n`,
-				b.answers.map(a => (`"${a.value}","${a.error ? 'E' : 'C'}",${a.time}\n`)).join(""),
-				`\n`
-			].join("")
-		}).join("");
-
-		return [
-			"data:text/*;charset=utf-8,",
-			sujetoLines,
-			`"${currResult.tipo || 'CBAL'}"\n\r`,
-			currResult.tipo == 'CBAL' ? categoriesCBal : categoriesBal,
-			bloqueLines
-		].join("");
-	}
 	const downloadData2 = () => {
-		let sujetoLines = `"${currResult.id}","XXXX","XX/XX/XX","${currResult.sujeto.ocupacion}","${currResult.sujeto.email}","${currResult.sujeto.edad}","${currResult.sujeto.genero}"\n`
+		let sujetoLines = `"${currResult.id}","XXXX","XX/XX/XX","${currResult.sujeto.ocupacion}","${currResult.sujeto.email}","${currResult.sujeto.edad}","${currResult.sujeto.genero}"\r\n`
 
 		let categoriesBal = datBalContent();
 		let categoriesCBal = datCBalContent();
 
 		console.log("datCBalContent", categoriesBal)
 		console.log("datBalContent", categoriesCBal)
+
+		if (currResult.tipo != 'BAL') {
+			let aux = currResult.bloques[2]
+			currResult.bloques[2] = currResult.bloques[4]
+			currResult.bloques[4] = aux;
+		}
+
 		let bloqueLines = currResult.bloques.map((b, ib) => {
 			return [
-				`"BLK${ib +1}" \n`,
-				b.answers.map(a => (`"${a.value}","${a.error ? 'E' : 'C'}",${a.time}\n`)).join(""),
-				`\n`
+				`"BLK${ib +1}" \r\n`,
+				b.answers.map(a => (`"${a.value}","${a.error ? 'E' : 'C'}",${a.time}\r\n`)).join(""),
+				`\r\n`
 			].join("")
 		}).join("");
 
 		var csvContent = [
 			sujetoLines,
-			`6\n1\n"${currResult.tipo || 'CBAL'}"\n\r`,
-			currResult.tipo == 'CBAL' ? categoriesCBal : categoriesBal,
+			`6\r\n1\r\n"${currResult.tipo || 'CBAL'}"\r\n\r\n`,
+			currResult.tipo == 'BAL' ? categoriesCBal : categoriesBal,
 			bloqueLines
 		].join("");
 
